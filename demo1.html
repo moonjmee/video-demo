@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Video Player</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+    <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js"></script>
+
+    <style>
+        .video-container {
+            display: flex;
+        }
+
+        .video-js {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Demo of short form videos</h1>
+    <h2>Left: Cloud H.264, Right: Elemental H.264 </h2>
+
+    <div class="video-container">
+        <video id="video1" class="video-js vjs-default-skin" controls autoplay muted>
+        </video>
+
+        <video id="video2" class="video-js vjs-default-skin" controls autoplay muted>
+        </video>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let options = {
+                sources: [
+                    {src: "/video/play", type: "video/mp4"}
+                ],
+                playbackRates: [.75, 1, 1.5, 2],
+                poster: "[이미지 주소 등록]",
+                controls: true,
+                preload: "auto",
+                width: 608,
+                height: 1080,
+                controlBar: {
+                    playToggle: true,
+                    pictureInPictureToggle: false,
+                    remainingTimeDisplay: true,
+                    progressControl: true,
+                    qualitySelector: true,
+                }
+            };
+
+            var player1 = videojs('video1', options);
+            player1.src([
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/base_short_MO-FHD_H264_V_MO-MC_1TK_AAC_2CH_CD00102.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001754Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=a6371016b4259e09aaecbb6927e0d88ac1ce93704e62c7a50ba1594d3ab553bd",
+                    type: 'video/mp4',
+                    label: 'FHD',
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/base_short_MO-HD_H264_V_MO-MC_1TK_AAC_2CH_CD00102.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001720Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=aaed8a2cf68f5a3c27965f64a3c0f4f208cc21842236a693329181936bf11e4e",
+                    type: 'video/mp4',
+                    label: 'HD',
+                    selected: true,
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/base_short_MO-SD_H264_V_MO-MC_1TK_AAC_2CH_CD00102.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001647Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43199&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=b2da8e807ca44db305a8f3eac50c90ed8af8330a4bb22dc3b9c3531c49aaeef7",
+                    type: 'video/mp4',
+                    label: 'SD',
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/base_short_MO-LD_H264_V_MO-MC_1TK_AAC_2CH_CD00102.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001614Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=a988caf1bab8aed0c4c0f73f00ed5cc5a57ff3c764eb1377787a223a607add77",
+                    type: 'video/mp4',
+                    label: 'LD',
+                },
+            ]);
+
+            var player2 = videojs('video2', options);
+            player2.src([
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/elemental-encoder/%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%AC_%EC%88%8F%EC%B8%A0_%EC%83%98%ED%94%8C1_MO%5BFHD-S%5D_shot.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001312Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=a7bacbd5ca0f8e90b8a7aa0f0ff954583be9b19bb6331a8918952a3e3ade95cb",
+                    type: 'video/mp4',
+                    label: 'FHD',
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/elemental-encoder/%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%AC_%EC%88%8F%EC%B8%A0_%EC%83%98%ED%94%8C1_MO%5BHD-S%5D_Shot.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001358Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43199&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=479b66aa73d08858f7e8f2bddc738e3c5bcf221294e2540d326df1e882424720",
+                    type: 'video/mp4',
+                    label: 'HD',
+                    selected: true,
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/elemental-encoder/%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%AC_%EC%88%8F%EC%B8%A0_%EC%83%98%ED%94%8C1_MO%5BSD-S%5D-W_Shot.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001413Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=8d73aeac57a11c518c4e2c4723c86727b2902b157c252ccc87a9966354ea0666",
+                    type: 'video/mp4',
+                    label: 'SD',
+                },
+                {
+                    src: "https://cmps-dev-output.s3.ap-northeast-2.amazonaws.com/short-form/%EC%88%8F%ED%8F%BC/elemental-encoder/%ED%94%84%EB%A1%9C%EC%95%BC%EA%B5%AC_%EC%88%8F%EC%B8%A0_%EC%83%98%ED%94%8C1_MO%5BLD-S%5D-W_Shot.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgFngHSmvQ37alWkxZHpPtyFoKSbX84qqpCxvwaj1BmRICIQDakvRSvetX3qyqCzgp43mJjh6JP2hAZwycjtXDC9tRhiqJAwg5EAEaDDAzNDYzNjAxMDY3MyIMSU0tMwR9u96tx%2BCMKuYC4OpPPI%2BkP3K6a5ZO2fy3hPOYcga02KiwwC5%2FbFvGW3uz3aN0yOzikYu1TiKIFCch01c%2BWORY2RjASGQVAgjpP44vmV7ZnkEetPVLcqwpKTyz03RA6UjdqlH4xdLq9zLg6nRKKCnNzjB3AuQRG7JNBNlIraqWBWVFZkeg%2F7itBsmh9%2FYAoJZq1rgBwdTt9FoPIgUvhvsxcCx96I2uLTBQYbABDAGwuXnOCwbygngg8oMf4wh1CJzRQUjlfcV%2FvNvWHLqHgRwCVFNADJvDV8jXqPw0pA%2BT%2FvkZV7%2BoVi4utGRXKXbVb8W%2BixeuWHkPO9nrfN8ApCQBkJlLC9ICokPTwc6hga6OoBHH%2FMct5guuWXSZEDNmy0EJkWzmEPgsdrx20XjnfYAaJFxOSAStiAeojABPay4nywXZt%2FtLx4uNHQgxIGGug6dDPux9fOuoFoHem0f4vsAm8gbmagE%2FTZ0iUVC6QYNUGTCG9PmjBjqzAiTbI59hPv0R47rS9HTljPoXRd6CPuSNaCZqo2Sz%2FAn4dD2lIXbmBd9Un1hAr3hn8OZcA8ODsPtRFdQ6ngrDyQJuUNJC3896qmDHXF%2FUG8EFD592dVoiclohsSv2hZZ4bZ5L%2BN7SFwmMN8BkRotgxQx2pXkn7u1PD1OWpDSrOMSc39g9SnkdQIDYC%2FdSf7FlDKrH0Xc0Zd1NHR5a1BmzLAH5vNeMP5GvbNOCdzvbNP9DSQUDAR0u8yV%2Fdhem6VZGyyxqkUHfeHEeg4MgJlGBkBXInL5OhEtwptMDzgRUD4LIfDNmoB7O2tV5fQ9Ukne3JR8HhRQKqxcVMS%2FfgwaxvgQ1pMP2VF7x9TjRNvnIBUD6HfvsJ1NjA%2F%2Fbh%2FyyxhqKt3VBAKJdM3RMHupglQe9FdKdAtw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230606T001429Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYTLOHHVPA%2F20230606%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=2fde0133db2e2fc896559206fd337726e01a7d54fc9a2ed6a2628b842dded2dd",
+                    type: 'video/mp4',
+                    label: 'LD',
+                },
+            ]);
+        })
+
+        var video1 = document.getElementById('video1');
+        var video2 = document.getElementById('video2');
+
+        video1.addEventListener('loadedmetadata', function() {
+            synchronizeVideos();
+        });
+
+        video1.addEventListener('timeupdate', function() {
+            synchronizeVideos();
+        });
+
+        video2.addEventListener('timeupdate', function() {
+            synchronizeVideos();
+        });
+
+        function synchronizeVideos() {
+            var currentTime = video1.currentTime;
+            if (video2.currentTime !== currentTime) {
+                video2.currentTime = currentTime;
+            }
+        }
+    </script>
+
+    
+</body>
+</html>
