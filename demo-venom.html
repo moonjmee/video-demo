@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Video Player</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+    <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js"></script>
+
+    <style>
+        .video-container {
+            display: flex;
+        }
+
+        .video-js {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Venom 2</h1>
+<h2>Left: Elemental H.264, Right: Cloud H.264 </h2>
+
+<div class="video-container">
+    <video id="video1" class="video-js vjs-default-skin" controls autoplay muted>
+    </video>
+
+    <video id="video2" class="video-js vjs-default-skin" controls autoplay muted>
+    </video>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let options = {
+            sources: [
+                {src: "/video/play", type: "video/mp4"}
+            ],
+            playbackRates: [.75, 1, 1.5, 2],
+            poster: "[이미지 주소 등록]",
+            controls: true,
+            preload: "auto",
+            width: 1920,
+            height: 540,
+            controlBar: {
+                playToggle: true,
+                pictureInPictureToggle: false,
+                remainingTimeDisplay: true,
+                progressControl: true,
+                qualitySelector: true,
+            }
+        };
+
+        var player1 = videojs('video1', options);
+        player1.src([
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/Venom_MO-FHD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113050Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=e2f8db52a41440ef7f57de0656b41ff88b7f165acad211da7f37709611a0e0f0",
+                type: 'video/mp4',
+                label: 'FHD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/Venom_MO-HD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113113Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=3d2db2ca0359eb2d75ea088fd042dad512accc8d621f72c5591bf96310509388",
+                type: 'video/mp4',
+                label: 'HD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/Venom_MO-SD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113130Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43199&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=d1009767bf504425fe3262a21ed62e5f5fa00899b4beabc6a48ca2edc218f5a3",
+                type: 'video/mp4',
+                label: 'SD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/Venom_MO-LD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113149Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=d37541a094cd8b9dd3b747667ecf8651594c4f4a9374e7ce00cccdb1b3782b79",
+                type: 'video/mp4',
+                label: 'LD',
+                selected: true,
+            },
+        ]);
+
+        var player2 = videojs('video2', options);
+        player2.src([
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/Venom_10min_MO-FHD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10008.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113438Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=0581fa18f6a46f453e3784bbc05383ea4ec54028c0a9eef237727666f9465f52",
+                type: 'video/mp4',
+                label: 'FHD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/Venom_10min_MO-HD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10008.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113420Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43199&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=b84192ffcf547e55c7e4c07388175b5039960125c9abfaca2f9b00babc364dfd",
+                type: 'video/mp4',
+                label: 'HD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/Venom_10min_MO-SD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10008.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113357Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=6d8138ee55287b537561352238f4df974883b4466df53a2b8acd506c3bf80a86",
+                type: 'video/mp4',
+                label: 'SD',
+                selected: true,
+            },
+            {
+                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/Venom_10min_MO-LD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10008.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aDmFwLW5vcnRoZWFzdC0yIkYwRAIgZFr%2FSSERofqsnEGXR1kBEPnNY6ljtUcMIqlwYGuH7pQCIHADCyEVrfZPexjfsJy%2BHIvPCqVgaFylzb90NqlXBFZZKokDCCcQARoMMDM0NjM2MDEwNjczIgypLsja2p68G93Je4gq5gJLg0t2Is68kRINtliJ0BHs8JUt9dsDdKy9txojB8C0%2FaYL4uTHkMLYy189V%2B13Vi%2BX88E9YvKke1oKaBvW5mzNcNjJnjWaJKnnZQx9C5KRPnfjjbMUi20%2B%2FVICQdSu0o%2BdLhw%2BMAfL3wu68COGxzKxSO3iD5LWst0wcxanN1EUkq8ogB5gPKFcLOQnpEb3aWgf7W%2BcM4iOsqxG6HmJxv5geFPeW8i8m29howBHQYxS0xPjxPq5fosQeMLrcpTCfEzMPqw21oB7fiXvanGexFRAviO%2Fm9AUk0XmRTmEdjYjPzCcWeYHHnXaAnR7UVThoP3UoLPWmi4M1Gdxmwm5uFRyr1OE62hQYW7KV3Brc4UbIYEubpai83jXWEBfflOAjLLZLuUtCatpeqftpyMtiwFzOlpaTWh%2BbA%2BvQqTmRjedTd4lLAEX7GlbNHBV7FytClJYD%2FKgsDI73ZNwtRWUWcqawgxMoQ%2FhMLG80KcGOrQCVYLXOxE1RPYclWWcmwIbyGGvSh2oYy1IsmlknXn1M6Ec55p6S1rtzGbKNPx3%2B9nz9KCWAD1RK%2Bht1owJ0W4gxTQu3Nr11nF3ZXDy1npQuzFoW7hZc7SO5I8C9zOJAYqazPace0sH%2BlD2lfzmQSNUkbQPQ4H2D0XqcDIDaB6xZhSXm8h9O8g8RiGuHgAVbczx39qC2VT6MSUA2mOw5JUO2orBDm7exlJZtymK5OkELIKcZt42yqjw1eFbeyVByg1%2BTS1M5RtMAbicz2a9%2BLOm2ixLSqxM6meOs8rpgnPS1xg4Eu1M%2Boq4p%2F9WUMHEwJ0lEzg%2F912UFKix0EfrVz2OLV%2BK31f2RbHkhytLYy1JBVaa5KRrA8Soefd7z8yDzrl1MIKcx9d5RNCGq2UtQnPTBHFEAiw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230903T113743Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQJRVNFNX%2F20230903%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=f671db4bbcb0eb21be3685a8c7e1280dfb14f6377f5fd4e0e10403a5bf2d4f06",
+                type: 'video/mp4',
+                label: 'LD',
+                selected: true,
+            },
+        ]);
+        player2.on('loadeddata', function() {
+            $('.vjs-loading-spinner').hide();
+        });
+    })
+
+    var video1 = document.getElementById('video1');
+    var video2 = document.getElementById('video2');
+
+    video1.addEventListener('loadedmetadata', function() {
+        synchronizeVideos();
+    });
+
+    video1.addEventListener('timeupdate', function() {
+        synchronizeVideos();
+    });
+
+    video2.addEventListener('timeupdate', function() {
+        synchronizeVideos();
+    });
+
+    function synchronizeVideos() {
+        var currentTime = video1.currentTime;
+        if (video2.currentTime !== currentTime) {
+            video2.currentTime = currentTime;
+        }
+    }
+</script>
+
+
+</body>
+</html>
