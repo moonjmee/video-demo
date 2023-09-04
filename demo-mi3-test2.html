@@ -21,14 +21,15 @@
         .video-js {
             position: absolute;
             top: 0;
-            left: 0;
         }
 
         #video1 {
+            left: 0;
             z-index: 1;
         }
 
         #video2 {
+            right: 0;
             z-index: 2;
         }
     </style>
@@ -97,7 +98,9 @@
             var slider = document.getElementById('slider');
             slider.addEventListener('input', function() {
                 const value = slider.value;
-                player2.el().style.width = `${value}%`;
+                player1.el().style.width = `${value}%`;
+                player2.el().style.width = `${100 - value}%`;
+                player2.el().style.left = `${value}%`;
             });
         });
     </script>
