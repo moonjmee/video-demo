@@ -12,96 +12,94 @@
 
     <style>
         .video-container {
-            display: flex;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
         }
 
         .video-js {
-            flex: 1;
-            margin-right: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #video1 {
+            z-index: 1;
+        }
+
+        #video2 {
+            z-index: 2;
         }
     </style>
 </head>
 
 <body>
-<h1>Mission Impossible 3</h1>
-<h2>Left: Elemental H.264, Right: Cloud H.264 </h2>
+    <h1>Mission Impossible 3</h1>
+    <h2>Left: Elemental H.264, Right: Cloud H.264 </h2>
 
-<div class="video-container">
-    <video id="video1" class="video-js vjs-default-skin" controls autoplay muted>
-    </video>
+    <div class="video-container">
+        <video id="video1" class="video-js vjs-default-skin" controls autoplay muted></video>
+        <video id="video2" class="video-js vjs-default-skin" controls autoplay muted></video>
+    </div>
 
-    <video id="video2" class="video-js vjs-default-skin" controls autoplay muted>
-    </video>
-</div>
+    <div id="slider-container">
+        <input type="range" id="slider" min="0" max="100" value="50">
+    </div>
 
-<script>
-    $(document).ready(function() {
-        let options = {
-            sources: [
+    <script>
+        document.addEventListener("DOMContentLoaded", function() { //$(document).ready(function() {
+            var options = {
+                sources: [
                 {src: "/video/play", type: "video/mp4"}
             ],
-            playbackRates: [.75, 1, 1.5, 2],
-            poster: "[이미지 주소 등록]",
-            controls: true,
-            preload: "auto",
-            width: 1920,
-            height: 540,
-            controlBar: {
+                playbackRates: [.75, 1, 1.5, 2],
+                poster: "[이미지 주소 등록]",
+                controls: true,
+                preload: "auto",
+                width: 1920,
+                height: 1080,
+                controlBar: {
                 playToggle: true,
                 pictureInPictureToggle: false,
                 remainingTimeDisplay: true,
                 progressControl: true,
                 qualitySelector: true,
             }
-        };
+            };
 
-        var player1 = videojs('video1', options);
-        player1.src([
-            {
-                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/MissionImpossible3_MO-HD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgMCTtogLCelMduF%2BsxvtoTBdmGhZ43%2Fop9C904j1EO14CIQCPPj3Q%2B8MfuuRbLY38gf1CBbQpo1iPgsF98Ht551R3WiqJAwg6EAEaDDAzNDYzNjAxMDY3MyIMQc%2FdhXoPQxk8dmMMKuYCUjTrY12v3sTjLjVFcw81j4S%2F6PrMl2lml4Y%2F%2F%2Fh5SJqB8ghth4IO645OKkCnUA4Ojar%2F3jyqfDwYQSkvWW0PiJIe6oIMXXK2ZaGJCbHbkye81Ch5BqPIGZL4%2FeLbr%2BknKEwd3yEuRHhaCSO%2BxChOzZm7QzoOM9N6i0lZYKvWny7RnkCMPLEaDla3BMhnD4cULy0f%2BhUmOGMByEiAMZpSd8ryyjql4Y7yJAfaMjKWWKg%2F1OjCuBHdCPIEmjTK5jlNw6Wbc%2FZmEQqTu2zL2nMlr2fgpZ6k3F9tKvcoIpxE1ku%2BDfMwRc26dFMgmpaS8ZX3NTTqyBdvBS7%2BkozuRpDBtOE2ayRkfpqmalXjJw4811UKq1m1cqdlR3ICG%2BNxorLI6q1n5RrDE%2BZAtDRESmxWLyVdKsHOqk6OVxyPQNBQyWZPw7uOvbzatumLOiU6oXdCgBkoMpJXps8OltlDGnSbGiaUeVcXujCRztSnBjqzAtroR%2BTlkfk7jkFC0pN88hHS6TM27C2RMiGdiVb0Jx15LVhP7h7Mm9Kmp4v1pt3skjtWQ9PNZxBluRhqfqubGob3GKFSZzcmzzSHj600Qc9GQL3XOnj%2Bbr4o9gtmAzkH0nwCG0SEvdozT3D0got6Tagc%2FHduQCw4om3RKE9FnMqfz2CCfY9riCOuD01HgtYwT1EGruoBC72E4FJrWbYVykWcWrmN030jJVxuk3hfxatp3%2FidTQ3wo3bQcZyVCmvtgIBQXFI4K7CkBxx0SjhV%2BhD2rQvQ%2BnpRIt8bYZ1e8BS%2FFy8SdEGPvJVslET6otbvOZgd5lPsfFF8EHvZMXHHeV6V3NfPrKS%2B3L2vFIz9kkCkYiymGTs04v8ZtT5McZMTU%2FnwA75qxCRQVumWfKTFQ0O7jN0%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230904T003933Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQADJZVGG%2F20230904%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=4eb92a49cb40a32602de787a1a5a84d5bb673a0101a500e1e60ea67e69c3ba70",
-                type: 'video/mp4',
-                label: 'HD',
-                selected: true,
-            },
-        ]);
+            var player1 = videojs('video1', options);
+            player1.src([
+                {
+                    src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-elemental/MissionImpossible3_MO-HD-H264.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgMCTtogLCelMduF%2BsxvtoTBdmGhZ43%2Fop9C904j1EO14CIQCPPj3Q%2B8MfuuRbLY38gf1CBbQpo1iPgsF98Ht551R3WiqJAwg6EAEaDDAzNDYzNjAxMDY3MyIMQc%2FdhXoPQxk8dmMMKuYCUjTrY12v3sTjLjVFcw81j4S%2F6PrMl2lml4Y%2F%2F%2Fh5SJqB8ghth4IO645OKkCnUA4Ojar%2F3jyqfDwYQSkvWW0PiJIe6oIMXXK2ZaGJCbHbkye81Ch5BqPIGZL4%2FeLbr%2BknKEwd3yEuRHhaCSO%2BxChOzZm7QzoOM9N6i0lZYKvWny7RnkCMPLEaDla3BMhnD4cULy0f%2BhUmOGMByEiAMZpSd8ryyjql4Y7yJAfaMjKWWKg%2F1OjCuBHdCPIEmjTK5jlNw6Wbc%2FZmEQqTu2zL2nMlr2fgpZ6k3F9tKvcoIpxE1ku%2BDfMwRc26dFMgmpaS8ZX3NTTqyBdvBS7%2BkozuRpDBtOE2ayRkfpqmalXjJw4811UKq1m1cqdlR3ICG%2BNxorLI6q1n5RrDE%2BZAtDRESmxWLyVdKsHOqk6OVxyPQNBQyWZPw7uOvbzatumLOiU6oXdCgBkoMpJXps8OltlDGnSbGiaUeVcXujCRztSnBjqzAtroR%2BTlkfk7jkFC0pN88hHS6TM27C2RMiGdiVb0Jx15LVhP7h7Mm9Kmp4v1pt3skjtWQ9PNZxBluRhqfqubGob3GKFSZzcmzzSHj600Qc9GQL3XOnj%2Bbr4o9gtmAzkH0nwCG0SEvdozT3D0got6Tagc%2FHduQCw4om3RKE9FnMqfz2CCfY9riCOuD01HgtYwT1EGruoBC72E4FJrWbYVykWcWrmN030jJVxuk3hfxatp3%2FidTQ3wo3bQcZyVCmvtgIBQXFI4K7CkBxx0SjhV%2BhD2rQvQ%2BnpRIt8bYZ1e8BS%2FFy8SdEGPvJVslET6otbvOZgd5lPsfFF8EHvZMXHHeV6V3NfPrKS%2B3L2vFIz9kkCkYiymGTs04v8ZtT5McZMTU%2FnwA75qxCRQVumWfKTFQ0O7jN0%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230904T003933Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQADJZVGG%2F20230904%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=4eb92a49cb40a32602de787a1a5a84d5bb673a0101a500e1e60ea67e69c3ba70",
+                    type: 'video/mp4',
+                    label: 'HD',
+                    selected: true,
+                },
+            ]);
 
-        var player2 = videojs('video2', options);
-        player2.src([
-            {
-                src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/MissionImpossible3_MO-HD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10006.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgMCTtogLCelMduF%2BsxvtoTBdmGhZ43%2Fop9C904j1EO14CIQCPPj3Q%2B8MfuuRbLY38gf1CBbQpo1iPgsF98Ht551R3WiqJAwg6EAEaDDAzNDYzNjAxMDY3MyIMQc%2FdhXoPQxk8dmMMKuYCUjTrY12v3sTjLjVFcw81j4S%2F6PrMl2lml4Y%2F%2F%2Fh5SJqB8ghth4IO645OKkCnUA4Ojar%2F3jyqfDwYQSkvWW0PiJIe6oIMXXK2ZaGJCbHbkye81Ch5BqPIGZL4%2FeLbr%2BknKEwd3yEuRHhaCSO%2BxChOzZm7QzoOM9N6i0lZYKvWny7RnkCMPLEaDla3BMhnD4cULy0f%2BhUmOGMByEiAMZpSd8ryyjql4Y7yJAfaMjKWWKg%2F1OjCuBHdCPIEmjTK5jlNw6Wbc%2FZmEQqTu2zL2nMlr2fgpZ6k3F9tKvcoIpxE1ku%2BDfMwRc26dFMgmpaS8ZX3NTTqyBdvBS7%2BkozuRpDBtOE2ayRkfpqmalXjJw4811UKq1m1cqdlR3ICG%2BNxorLI6q1n5RrDE%2BZAtDRESmxWLyVdKsHOqk6OVxyPQNBQyWZPw7uOvbzatumLOiU6oXdCgBkoMpJXps8OltlDGnSbGiaUeVcXujCRztSnBjqzAtroR%2BTlkfk7jkFC0pN88hHS6TM27C2RMiGdiVb0Jx15LVhP7h7Mm9Kmp4v1pt3skjtWQ9PNZxBluRhqfqubGob3GKFSZzcmzzSHj600Qc9GQL3XOnj%2Bbr4o9gtmAzkH0nwCG0SEvdozT3D0got6Tagc%2FHduQCw4om3RKE9FnMqfz2CCfY9riCOuD01HgtYwT1EGruoBC72E4FJrWbYVykWcWrmN030jJVxuk3hfxatp3%2FidTQ3wo3bQcZyVCmvtgIBQXFI4K7CkBxx0SjhV%2BhD2rQvQ%2BnpRIt8bYZ1e8BS%2FFy8SdEGPvJVslET6otbvOZgd5lPsfFF8EHvZMXHHeV6V3NfPrKS%2B3L2vFIz9kkCkYiymGTs04v8ZtT5McZMTU%2FnwA75qxCRQVumWfKTFQ0O7jN0%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230904T004000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQADJZVGG%2F20230904%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=b628da41e09d0e9812a6a8e06369653f6e939984d004224f9c7154e1364224c1",
-                type: 'video/mp4',
-                label: 'HD',
-                selected: true,
-            },
-        ]);
-        player2.on('loadeddata', function() {
-            $('.vjs-loading-spinner').hide();
+            var player2 = videojs('video2', options);
+            player2.src([
+                {
+                    src: "https://cmps-dev-input.s3.ap-northeast-2.amazonaws.com/quality-test/output-cloud-sharpness-1.0/MissionImpossible3_MO-HD-H264-MP4_MO-MC-1TK-AAC-2CH_CE10006.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGEaDmFwLW5vcnRoZWFzdC0yIkcwRQIgMCTtogLCelMduF%2BsxvtoTBdmGhZ43%2Fop9C904j1EO14CIQCPPj3Q%2B8MfuuRbLY38gf1CBbQpo1iPgsF98Ht551R3WiqJAwg6EAEaDDAzNDYzNjAxMDY3MyIMQc%2FdhXoPQxk8dmMMKuYCUjTrY12v3sTjLjVFcw81j4S%2F6PrMl2lml4Y%2F%2F%2Fh5SJqB8ghth4IO645OKkCnUA4Ojar%2F3jyqfDwYQSkvWW0PiJIe6oIMXXK2ZaGJCbHbkye81Ch5BqPIGZL4%2FeLbr%2BknKEwd3yEuRHhaCSO%2BxChOzZm7QzoOM9N6i0lZYKvWny7RnkCMPLEaDla3BMhnD4cULy0f%2BhUmOGMByEiAMZpSd8ryyjql4Y7yJAfaMjKWWKg%2F1OjCuBHdCPIEmjTK5jlNw6Wbc%2FZmEQqTu2zL2nMlr2fgpZ6k3F9tKvcoIpxE1ku%2BDfMwRc26dFMgmpaS8ZX3NTTqyBdvBS7%2BkozuRpDBtOE2ayRkfpqmalXjJw4811UKq1m1cqdlR3ICG%2BNxorLI6q1n5RrDE%2BZAtDRESmxWLyVdKsHOqk6OVxyPQNBQyWZPw7uOvbzatumLOiU6oXdCgBkoMpJXps8OltlDGnSbGiaUeVcXujCRztSnBjqzAtroR%2BTlkfk7jkFC0pN88hHS6TM27C2RMiGdiVb0Jx15LVhP7h7Mm9Kmp4v1pt3skjtWQ9PNZxBluRhqfqubGob3GKFSZzcmzzSHj600Qc9GQL3XOnj%2Bbr4o9gtmAzkH0nwCG0SEvdozT3D0got6Tagc%2FHduQCw4om3RKE9FnMqfz2CCfY9riCOuD01HgtYwT1EGruoBC72E4FJrWbYVykWcWrmN030jJVxuk3hfxatp3%2FidTQ3wo3bQcZyVCmvtgIBQXFI4K7CkBxx0SjhV%2BhD2rQvQ%2BnpRIt8bYZ1e8BS%2FFy8SdEGPvJVslET6otbvOZgd5lPsfFF8EHvZMXHHeV6V3NfPrKS%2B3L2vFIz9kkCkYiymGTs04v8ZtT5McZMTU%2FnwA75qxCRQVumWfKTFQ0O7jN0%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230904T004000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAQQEDXSSYQADJZVGG%2F20230904%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=b628da41e09d0e9812a6a8e06369653f6e939984d004224f9c7154e1364224c1",
+                    type: 'video/mp4',
+                    label: 'HD',
+                    selected: true,
+                },
+            ]);
+
+            // 비디오 동기화
+            player1.on('timeupdate', function() {
+                player2.currentTime(player1.currentTime());
+            });
+
+            // 슬라이더 이벤트
+            var slider = document.getElementById('slider');
+            slider.addEventListener('input', function() {
+                const value = slider.value;
+                player2.el().style.width = `${value}%`;
+            });
         });
-    })
-
-    var video1 = document.getElementById('video1');
-    var video2 = document.getElementById('video2');
-
-    video1.addEventListener('loadedmetadata', function() {
-        synchronizeVideos();
-    });
-
-    video1.addEventListener('timeupdate', function() {
-        synchronizeVideos();
-    });
-
-    video2.addEventListener('timeupdate', function() {
-        synchronizeVideos();
-    });
-
-    function synchronizeVideos() {
-        var currentTime = video1.currentTime;
-        if (video2.currentTime !== currentTime) {
-            video2.currentTime = currentTime;
-        }
-    }
-</script>
-
-
+    </script>
 </body>
 </html>
