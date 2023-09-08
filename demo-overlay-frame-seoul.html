@@ -79,12 +79,12 @@
     <div class="video-container">
         <div class="video-wrapper">
             <video id="video1" class="video-js vjs-default-skin" controls autoplay muted></video>
-            <div class="overlay-text" id="overlay-text1">Elemental H.264 (MO-FHD 4M)</div>
+            <div class="overlay-text" id="overlay-text1">Elemental H.264 (TV-FHD 16.1M)</div>
         </div>
         <div class="divider"></div> <!-- Divider line -->
         <div class="video-wrapper">
             <video id="video2" class="video-js vjs-default-skin" controls autoplay muted></video>
-            <div class="overlay-text" id="overlay-text2">Cloud H.264 (MO-FHD 3.4M)</div>
+            <div class="overlay-text" id="overlay-text2">Cloud H.264 (TV-FHD 15.9M)</div>
         </div>
         <!-- Add the progress bar here, outside the video-wrapper -->
         <div class="control-bar"></div>
@@ -118,30 +118,30 @@
             var player1 = videojs('video1', options);
             player1.src([
                 {
-                    src: "contents/meridian-mo-fhd-elemental1.mp4",
+                    src: "contents/seoul-tv-hd-elemental1.mp4",
                     type: 'video/mp4',
                     label: 'frame1',
-                    selected: true,
                 },
                 {
-                    src: "contents/meridian-mo-fhd-elemental2.mp4",
+                    src: "contents/seoul-tv-hd-elemental2.mp4",
                     type: 'video/mp4',
                     label: 'frame2',
+                    selected: true,
                 },
             ]);
 
             var player2 = videojs('video2', options);
             player2.src([
                 {
-                    src: "contents/meridian-mo-fhd-cloud1.mp4",
+                    src: "contents/seoul-tv-hd-cloud1.mp4",
                     type: 'video/mp4',
                     label: 'frame1',
-                    selected: true,
                 },
                 {
-                    src: "contents/meridian-mo-fhd-cloud2.mp4",
+                    src: "contents/seoul-tv-hd-cloud2.mp4",
                     type: 'video/mp4',
                     label: 'frame2',
+                    selected: true,
                 },
             ]);
 
