@@ -112,6 +112,7 @@
                     remainingTimeDisplay: true,
                     progressControl: true,
                     qualitySelector: true,
+                    qualityLevels: true,
                 }
             };
 
@@ -155,6 +156,46 @@
                 },
             ]);
 
+            // player1에 대한 qualitychange 이벤트 리스너
+            player1.on('qualitychange', function() {
+                const currentQuality = player1.qualityLevels().levels_[player1.qualityLevels().selectedIndex].label;
+                console.log("Player 1 quality changed: ", currentQuality);
+                const overlayText1 = document.getElementById('overlay-text1');
+                switch (currentQuality) {
+                    case 'FHD':
+                        overlayText1.textContent = "Elemental H.264 FHD";
+                        break;
+                    case 'HD':
+                        overlayText1.textContent = "Elemental H.264 HD";
+                        break;
+                    case 'SD':
+                        overlayText1.textContent = "Elemental H.264 SD";
+                        break;
+                    default:
+                        overlayText1.textContent = "Elemental H.264";
+                }
+            });
+
+            // player2에 대한 qualitychange 이벤트 리스너
+            player2.on('qualitychange', function() {
+                const currentQuality = player2.qualityLevels().levels_[player2.qualityLevels().selectedIndex].label;
+                console.log("Player 2 quality changed: ", currentQuality);
+                const overlayText2 = document.getElementById('overlay-text2');
+                switch (currentQuality) {
+                    case 'FHD':
+                        overlayText2.textContent = "Cloud H.264 FHD";
+                        break;
+                    case 'HD':
+                        overlayText2.textContent = "Cloud H.264 HD";
+                        break;
+                    case 'SD':
+                        overlayText2.textContent = "Cloud H.264 SD";
+                        break;
+                    default:
+                        overlayText2.textContent = "Cloud H.264";
+                }
+            });
+
             player2.on('loadeddata', function () {
                 $('.vjs-loading-spinner').hide();
             });
@@ -169,6 +210,7 @@
 
             window.addEventListener('mousemove', function(e) {
                 if (isDragging) {
+                    const value = window.value;
                     var container = document.querySelector('.video-container');
                     var containerRect = container.getBoundingClientRect();
                     var x = e.clientX - containerRect.left;
@@ -185,6 +227,18 @@
 
                     player1.el().style.clip = `rect(0px, ${clipWidth1}px, ${containerHeight}px, 0px)`;
                     player2.el().style.clip = `rect(0px, ${containerWidth}px, ${containerHeight}px, ${clipWidth1}px)`;
+
+                    // overlay-text2에 대한 clip 스타일 설정
+                    const overlayText2 = document.getElementById('overlay-text2');
+                    const overlayText2Rect = overlayText2.getBoundingClientRect();
+                    const overlayText2Start = overlayText2Rect.left - container.getBoundingClientRect().left;
+
+                    if (clipWidth1 >= overlayText2Start) {
+                        const clipLeft = clipWidth1 - overlayText2Start;
+                        overlayText2.style.clip = `rect(0px, ${overlayText2.offsetWidth}px, ${overlayText2.offsetHeight}px, ${clipLeft}px)`;
+                    } else {
+                        overlayText2.style.clip = `rect(0px, ${overlayText2.offsetWidth}px, ${overlayText2.offsetHeight}px, 0px)`;
+                    }
 
                     // Adjust the width of the progress bar
                     var progressBar = document.querySelector('.control-bar'); // 수정된 변수 이름
@@ -207,6 +261,20 @@
 
                 player1.el().style.clip = `rect(0px, ${clipWidth1}px, ${containerHeight}px, 0px)`;
                 player2.el().style.clip = `rect(0px, ${containerWidth}px, ${containerHeight}px, ${clipWidth1}px)`;
+
+                // overlay-text2에 대한 clip 스타일 설정
+                const overlayText2 = document.getElementById('overlay-text2');
+                const container = document.querySelector('.video-container');
+                const overlayText2Rect = overlayText2.getBoundingClientRect();
+                const overlayText2Start = overlayText2Rect.left - container.getBoundingClientRect().left;
+
+                if (clipWidth1 >= overlayText2Start) {
+                    const clipLeft = clipWidth1 - overlayText2Start;
+                    overlayText2.style.clip = `rect(0px, ${overlayText2.offsetWidth}px, ${overlayText2.offsetHeight}px, ${clipLeft}px)`;
+                } else {
+                    overlayText2.style.clip = `rect(0px, ${overlayText2.offsetWidth}px, ${overlayText2.offsetHeight}px, 0px)`;
+                }
+
                 divider.style.left = `${clipWidth1}px`; // Set the position of the divider line
             });
         });
