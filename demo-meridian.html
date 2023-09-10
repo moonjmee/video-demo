@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Video Player</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+    <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script-meridian.js"></script>
+</head>
+
+<body>
+    <div class="video-container">
+        <div class="video-wrapper">
+            <video id="video1" class="video-js vjs-default-skin" controls autoplay muted></video>
+            <div class="overlay-text" id="overlay-text1"></div>
+        </div>
+        <div class="divider"></div> <!-- Divider line -->
+        <div class="video-wrapper">
+            <video id="video2" class="video-js vjs-default-skin" controls autoplay muted></video>
+            <div class="overlay-text" id="overlay-text2"></div>
+        </div>
+        <!-- Add the progress bar here, outside the video-wrapper -->
+        <div class="control-bar"></div>
+    </div>
+</body>
+</html>

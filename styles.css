@@ -1,0 +1,61 @@
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+}
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Assuming you have two videos side by side */
+    height: 100%;
+}
+.video-js {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+.divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6px; /* Width of the divider line */
+    background-color: white; /* Color of the divider line */
+    z-index: 4;
+}
+.overlay-text {
+    position: absolute;
+    z-index: 3;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#overlay-text1 {
+    top: 10px;
+    left: 10px;
+}
+
+#overlay-text2 {
+    top: 10px;
+    right: 10px;
+}
+
+.video-js .vjs-control-bar {
+    z-index: 3;  /* Add this line to bring the control bar to the front */
+}
+
+/* Add this CSS to position the control bar outside the video-wrapper */
+.control-bar {
+    position: absolute;
+    bottom: 10px; /* Adjust the desired distance from the video */
+    left: 0;
+    width: 100%; /* Adjust the width as needed */
+    height: auto; /* Allow the control bar to determine its height */
+    z-index: 5; /* Ensure the control bar is above the video */
+}
